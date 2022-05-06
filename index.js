@@ -4,7 +4,7 @@ import { resolve } from 'path'
 import { config } from 'dotenv'
 
 import switches from './switches.js'
-                                                  
+
 //load .env
 import { fileURLToPath } from 'url'
 import { dirname } from 'path'
@@ -23,10 +23,7 @@ tail.on("line", async function(data) {
     const raw = data.split('~DEVICE,')[1].split(',')
     console.log("Parseable data: ", data);
 
-
-
-    //device 2 = pico office
-    const labels = {2:'on',5:'up',3:'fav',6:'down',4:'off'}
+    const labels = {2:'on',5:'increase',3:'fav',6:'decrease',4:'off'}
 
     const event = {
       remote: raw[0],
@@ -45,6 +42,11 @@ tail.on("line", async function(data) {
 	    if(['on','off'].includes(event.button.name)) {
             console.log("on off action")
             const url = `http://${api}/lights/${room}/${event.button.name}/${light}`
+            const response = await fetch(url).then(r=>r.json())
+            console.log(response)
+        } else if (['increase','decrease'].includes(event.button.name)) {
+            console.log("increase decrease action")
+            const url = `http://${api}/lights/${room}/brightness/${light}/${event.button.name}`
             const response = await fetch(url).then(r=>r.json())
             console.log(response)
 	    } else {
