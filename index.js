@@ -1,22 +1,11 @@
 import { Tail } from 'tail'
 import fetch from 'node-fetch'
-import { resolve } from 'path'
-import { config } from 'dotenv'
-
+import config from './env.js'
 import switches from './switches.js'
-
-//load .env
-import { fileURLToPath } from 'url'
-import { dirname } from 'path'
-const __filename = fileURLToPath(import.meta.url)
-const __dirname = dirname(__filename)
-config({ path: resolve(__dirname, ".env") })
 
 const tail = new Tail("../homebridge.log")
 const { room, api } = process.env
 console.log(room, api)
-//http://<hue>/lights/<room>/brightness/16
-//room/brightness/id/value
 
 tail.on("line", async function(data) {
   try {
@@ -34,7 +23,7 @@ tail.on("line", async function(data) {
     const lights = switches[event.remote] || [16]
 
     if(event.action == 4) return //button up
-
+    event.lights = lights
     console.log(event)
 
     for(let light of lights) {
