@@ -5,7 +5,17 @@ const switches = {
    2: [9,10], //oficina ceiling fan
   18: [16], //bedroom
   19: [22], //quiet light
-  34: [3,4,5,6] //dining room
+  34: [3,4,5,6], //dining room
+  37: [17,19,21] //sun room
+}
+
+const special = {
+  18: {
+    'single':'special single action',
+    'double':'special double action'
+  }
 }
 
 export default switches
+
+export { special }
