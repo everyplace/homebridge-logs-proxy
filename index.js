@@ -29,15 +29,15 @@ tail.on("line", async function(data) {
     for(let light of lights) {
 	    //button mapping to settings
 	    if(['on','off'].includes(event.button.name)) {
-            console.log("on off action")
-            const url = `http://${api}/lights/${room}/${event.button.name}/${light}`
-            const response = await fetch(url).then(r=>r.json())
-            console.log(response)
-        } else if (['increase','decrease'].includes(event.button.name)) {
-            console.log("increase decrease action")
-            const url = `http://${api}/lights/${room}/brightness/${light}/${event.button.name}`
-            const response = await fetch(url).then(r=>r.json())
-            console.log(response)
+        console.log("on off action")
+        const url = `http://${api}/lights/${room}/${event.button.name}/${light}`
+        const response = await fetch(url).then(r=>r.json())
+        console.log(response)
+      } else if (['increase','decrease'].includes(event.button.name)) {
+        console.log("increase decrease action")
+        const url = `http://${api}/lights/${room}/brightness/${light}/${event.button.name}`
+        const response = await fetch(url).then(r=>r.json())
+        console.log(response)
 	    } else {
     		const value = event.button.name === 'up' ? 200 : event.button.name === 'down' ? 50 : 125
     		const url = `http://${api}/lights/${room}/brightness/${light}/${value}`
