@@ -20,7 +20,7 @@ tail.on("line", async function(data) {
       action: raw[2]
     }
 
-    const lights = switches[event.remote] || [16]
+    const lights = switches[event.remote] //used to default to 16, but no more
 
     if(event.action == 4) return //button up
     event.lights = lights
