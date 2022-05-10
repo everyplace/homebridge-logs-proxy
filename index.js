@@ -3,7 +3,9 @@ import fetch from 'node-fetch'
 import config from './env.js'
 import switches from './switches.js'
 
-const tail = new Tail("../homebridge.log")
+const logfile = process.env.LOGFILE || '../homebridge.log'
+
+const tail = new Tail(logfile)
 const { room, api } = process.env
 console.log(room, api)
 
