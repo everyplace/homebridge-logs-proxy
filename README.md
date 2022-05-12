@@ -20,7 +20,25 @@ This is an experimental project, and probably should be packaged up properly as 
 1. `cd homebridge-logs-proxy; npm install;`
 1. `npm run monitor` to run with nodemon.
 
-### Configuration
+### Configuration - Docker
+1. First, run `./build.sh` to create a docker image locally.
+1. Run the app, and specify the location of the running homebridge location on your device.
+```
+#mount homebridge folder at /usr/src/homebridge, then reference it directly via the LOGFILE env var
+docker run \ 
+  --env api="router.lan:3003" \
+  --env room="Oficina" \
+  --env LOGFILE=/usr/src/homebridge/homebridge.log 
+  -it \
+  --detach \
+  -p 0.0.0.0:3005:8080 \
+  --name logs-proxy \
+  -v /root/homebridge:/usr/src/homebridge \
+  --workdir /usr/src/app \
+  -d everyplace/homebridge-logs-proxy-alpine
+```
+
+### Configuration - Manual
 This project relies on both a `.env` file (or equivalent environmental variables) and a `switches.js` file to act as a mapping between the id of the Caseta Pico remote (as determined by `homebridge-pico`), and the ids of the lights you'd like the remote to operate on (as determined by your hue hub).
 
 The format of the mapping is a JSON object with a key of the pico id, and the value as an array of hue ids. 

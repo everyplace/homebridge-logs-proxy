@@ -1,0 +1,3 @@
+#Sample log file
+This should be ignored, as it has no valid row signature.
+It should also allow the app to boot up even without a valid env var. 
