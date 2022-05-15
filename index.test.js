@@ -13,7 +13,7 @@ const single = `
 `
 
 import { override } from './switches.js'
-import { readFileSync, writeFileSync } from 'fs'
+import { readFileSync, writeFileSync, appendFileSync } from 'fs'
 
 const randomRemote = () => {
   const rooms = [
@@ -52,11 +52,15 @@ const timestamp = () => {
   return `[${month}/${date}/${year}, ${hour}:${minute}:${second} ${suffix}]`
 }
 
+const logFile = './homebridge.test.log'
+
 test('Simulating log writing', ()=>{
 
-  const simulatedLog = `${timestamp()} ${randomRemote()}`
+  const simulatedLog = `${timestamp()} ${randomRemote()}\n`
 
   console.log(simulatedLog)
+
+  appendFileSync(logFile, simulatedLog)
 
   expect(true).toEqual(true)
 })
