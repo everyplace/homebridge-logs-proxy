@@ -1,13 +1,13 @@
 import { Tail } from 'tail'
 import fetch from 'node-fetch'
 import config from './env.js'
-import switches from './switches.js'
+import { switches, override } from './switches.js'
 
 const logfile = process.env.LOGFILE || '../homebridge.log'
 
 const tail = new Tail(logfile)
 const { room, api } = process.env
-console.log(room, api)
+console.log({room, api, logfile})
 
 tail.on("line", async function(data) {
   try {
@@ -28,6 +28,17 @@ tail.on("line", async function(data) {
     event.lights = lights
     console.log(event)
 
+/*
+    if(overrides[event.remote] !== undefined && event.button.name === 'fav') {
+      const {action, value} = overrides
+      console.log(`Attempting to override ${event.remote} ${event.button}`)
+      for (let light of lights) {
+        const url = `http://${api}/lights/${action}/${light}/${value}
+        const response = await fetch(url).then(r=>r.json())
+      }
+      return overrides
+    }
+*/
     for(let light of lights) {
 	    //button mapping to settings
 	    if(['on','off'].includes(event.button.name)) {
