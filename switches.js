@@ -9,13 +9,19 @@ const switches = {
   37: [17,19,21] //sun room
 }
 
-const special = {
-  18: {
-    'single':'special single action',
-    'double':'special double action'
-  }
+const overrides = [
+  {"switch":18, "method": "single", action: 'saturation', value:140},
+  {"switch":18, "method": "double", action: 'saturation', value:0}
+]
+
+const override = (id, method) => {
+  const config = overrideConfig.filter((row)=>{
+    return row.switch === id && row.method === method
+  })
+  if(config.length === 0) throw new Error('No override available')
+  return config
 }
 
 export default switches
 
-export { special }
+export { switches, override }
