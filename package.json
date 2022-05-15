@@ -4,9 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
     "start": "node index.js",
-    "monitor": "nodemon index.js"
+    "monitor": "nodemon index.js",
+    "test-watch": "node --experimental-vm-modules node_modules/jest/bin/jest.js --watch"
   },
   "type": "module",
   "author": "",
@@ -15,5 +16,8 @@
     "dotenv": "^16.0.0",
     "node-fetch": "^3.2.4",
     "tail": "^2.2.4"
+  },
+  "devDependencies": {
+    "jest": "^28.1.0"
   }
 }
