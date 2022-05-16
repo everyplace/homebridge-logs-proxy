@@ -6,3 +6,11 @@
 [4/15/2022, 17:43:35 PM] [Pico] Cama Grande - On double press
 [4/15/2022, 17:43:50 PM] [Pico] Dining room - Off double press
 [4/15/2022, 17:45:17 PM] [Pico] Dining room - Off single press
+[4/16/2022, 0:7:35 AM] [Pico] Cama Grande - On double press
+[4/16/2022, 0:8:50 AM] [Pico] Dining room - Off double press
+[4/16/2022, 0:9:26 AM] [Pico] Dining room - Off double press
+[4/16/2022, 0:9:26 AM] [Pico] [lutron.lan] Bus Data: ~DEVICE,32,5,3
+[4/16/2022, 0:10:0 AM] [Pico] Cama Grande - On double press
+[4/16/2022, 0:10:0 AM] [Pico] [lutron.lan] Bus Data: ~DEVICE,18,2,3
+[4/16/2022, 0:10:16 AM] [Pico] Dining room - Off double press
+[4/16/2022, 0:10:16 AM] [Pico] [lutron.lan] Bus Data: ~DEVICE,34,3,3

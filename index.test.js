@@ -12,8 +12,28 @@ const single = `
 [5/15/2022, 1:54:00 AM] [Pico] Oficina Bonus New - Off single press
 `
 
-import { override } from './switches.js'
+const valid = `
+[5/15/2022, 7:27:41 PM] [Pico] [lutron.lan] Bus Data: ~DEVICE,19,4,4
+[5/15/2022, 7:27:41 PM] [Pico] [lutron.lan] Bus Data: ~DEVICE,19,2,3
+[5/15/2022, 7:27:41 PM] [Pico] [lutron.lan] Bus Data: ~DEVICE,19,2,4
+[5/15/2022, 7:27:42 PM] [Pico] [lutron.lan] Bus Data: ~DEVICE,19,3,3
+[5/15/2022, 7:27:43 PM] [Pico] [lutron.lan] Bus Data: ~DEVICE,19,3,4
+[5/15/2022, 7:27:43 PM] [Pico] [lutron.lan] Bus Data: ~DEVICE,19,2,3
+
+`
+
+import { switches, override } from './switches.js'
 import { readFileSync, writeFileSync, appendFileSync } from 'fs'
+
+const randomAction = () => {
+  const validSwitches = Object.keys(switches)
+  const validSwitch = validSwitches[Math.floor(Math.random()*validSwitches.length)]
+  const validButtons = [2,5,3,6,4]
+  const validButton = validButtons[Math.floor(Math.random()*validButtons.length)]
+
+  const action = `[Pico] [lutron.lan] Bus Data: ~DEVICE,${validSwitch},${validButton},3`
+  return action
+}
 
 const randomRemote = () => {
   const rooms = [
@@ -54,9 +74,21 @@ const timestamp = () => {
 
 const logFile = './homebridge.test.log'
 
-test('Simulating log writing', ()=>{
+test('Simulating log writing for invalid actions', ()=>{
 
   const simulatedLog = `${timestamp()} ${randomRemote()}\n`
+
+  console.log(simulatedLog)
+
+  appendFileSync(logFile, simulatedLog)
+
+  expect(true).toEqual(true)
+})
+
+
+test('Simulating log writing for valid actions', ()=>{
+
+  const simulatedLog = `${timestamp()} ${randomAction()}\n`
 
   console.log(simulatedLog)
 
