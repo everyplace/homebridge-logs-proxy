@@ -4,6 +4,7 @@ const switches = {
   44: [23], //oficina lamp
    2: [9,10], //oficina ceiling fan
   18: [16], //bedroom
+  47: [16], //bedroom bedside
   19: [22], //quiet light
   34: [3,4,5,6], //dining room
   37: [17,19,21] //sun room
